@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Game Data API",
+    "version": "1.0.0",
+    "description": "An API to expose game data from a CSV file"
+  },
+  "paths": {
+    "/games/": {
+      "get": {
+        "summary": "Get list of games",
+        "operationId": "get_games",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 1 },
+            "example": 2
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 10 },
+            "example": 5
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "Release date"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "Genres"
+          },
+          {
+            "name": "filter_value",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "Action"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Game" }
+                },
+                "examples": {
+                  "games": {
+                    "summary": "Sample games response",
+                    "value": [
+                      {
+                        "AppID": 20200,
+                        "Name": "Galactic Bowling",
+                        "Release date": "Oct 21, 2008",
+                        "Price": 19.99,
+                        "Genres": "Casual,Indie,Sports",
+                        "Supported languages": "English"
+                      },
+                      {
+                        "AppID": 655370,
+                        "Name": "Train Bandit",
+                        "Release date": "Oct 12, 2017",
+                        "Price": 0.99,
+                        "Genres": "Action,Indie",
+                        "Supported languages": "English,French,Italian"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new game entry",
+        "operationId": "create_game",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Game" },
+              "example": {
+                "AppID": 1732930,
+                "Name": "Jolt Project",
+                "Release date": "Nov 17, 2021",
+                "Price": 4.99,
+                "Genres": "Action,Adventure,Indie",
+                "Supported languages": "English,Portuguese - Brazil"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Game created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Game" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games/{game_id}": {
+      "get": {
+        "summary": "Get a game by ID",
+        "operationId": "get_game",
+        "parameters": [
+          {
+            "name": "game_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "example": 655370
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Game" },
+                "example": {
+                  "AppID": 655370,
+                  "Name": "Train Bandit",
+                  "Release date": "Oct 12, 2017",
+                  "Price": 0.99,
+                  "Genres": "Action,Indie",
+                  "Supported languages": "English,French,Italian"
+                }
+              }
+            }
+          },
+          "404": { "description": "Game not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a game by ID",
+        "operationId": "update_game",
+        "parameters": [
+          {
+            "name": "game_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "example": 655370
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Game" },
+              "example": {
+                "AppID": 655370,
+                "Name": "Train Bandit - Updated",
+                "Release date": "Oct 12, 2017",
+                "Price": 1.99,
+                "Genres": "Action,Indie,Arcade",
+                "Supported languages": "English,French,Italian"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Game updated",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Game" }
+              }
+            }
+          },
+          "404": { "description": "Game not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a game by ID",
+        "operationId": "delete_game",
+        "parameters": [
+          {
+            "name": "game_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "example": 655370
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game deleted",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Game" },
+                "example": {
+                  "AppID": 655370,
+                  "Name": "Train Bandit",
+                  "Release date": "Oct 12, 2017",
+                  "Price": 0.99,
+                  "Genres": "Action,Indie",
+                  "Supported languages": "English,French,Italian"
+                }
+              }
+            }
+          },
+          "404": { "description": "Game not found" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Game": {
+        "type": "object",
+        "properties": {
+          "AppID": { "type": "integer" },
+          "Name": { "type": "string" },
+          "Release date": { "type": "string" },
+          "Estimated owners": { "type": "string" },
+          "Peak CCU": { "type": "integer" },
+          "Required age": { "type": "integer" },
+          "Price": { "type": "number", "format": "float" },
+          "DiscountDLC count": { "type": "integer" },
+          "About the game": { "type": "string" },
+          "Supported languages": { "type": "string" },
+          "Full audio languages": { "type": "string" },
+          "Reviews": { "type": "string" },
+          "Header image": { "type": "string", "format": "uri" },
+          "Website": { "type": "string", "format": "uri" },
+          "Support url": { "type": "string", "format": "uri" },
+          "Support email": { "type": "string", "format": "email" },
+          "Windows": { "type": "boolean" },
+          "Mac": { "type": "boolean" },
+          "Linux": { "type": "boolean" },
+          "Metacritic score": { "type": "boolean" },
+          "Metacritic url": { "type": "integer" },
+          "User score": { "type": "string" },
+          "Positive": { "type": "integer" },
+          "Negative": { "type": "integer" },
+          "Score rank": { "type": "integer" },
+          "Achievements": { "type": "number", "format": "float" },
+          "Recommendations": { "type": "integer" },
+          "Notes": { "type": "integer" },
+          "Average playtime forever": { "type": "string" },
+          "Average playtime two weeks": { "type": "integer" },
+          "Median playtime forever": { "type": "integer" },
+          "Median playtime two weeks": { "type": "integer" },
+          "Developers": { "type": "string" },
+          "Publishers": { "type": "string" },
+          "Categories": { "type": "string" },
+          "Genres": { "type": "string" },
+          "Tags": { "type": "string" },
+          "Screenshots": { "type": "string" },
+          "Movies": { "type": "string" }
+        },
+        "required": ["AppID", "Name", "Price"]
+      }
+    }
+  }
+}
