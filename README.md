@@ -1,32 +1,32 @@
-Forsøgt med at få ChatGPT til at lave et python api med en csv som "database".
+# FastAPI CSV API
 
+Dette projekt opretter et Python API ved hjælp af FastAPI og pandas, der bruger en CSV-fil som "database".    
+API'et understøtter CRUD-operationer samt pagination, filtrering og sortering.
 
-## How-2-Run:
-Udpak games.rar
-Opret evt. et virtuelt miljø og skriv commandoen under cmd.
+## How to Run
+
+1. Udpak `games.rar`.
+2. Opret evt. et virtuelt miljø.
+3. Kør følgende *Very-Street-OneLinerTM* i terminalen. Hvis du Ikke kører virtuelt, start fra pip install delen.
+
+   .venv\Scripts\activate; pip install -r requirements.txt; py main.py
 
 
 ## Links
 
-Dataset:
-https://www.kaggle.com/datasets/fronkongames/steam-games-dataset/data
--- Note: Der er fejl i datasættet, som de også skriver i deres discussions. Opdagede det bare for sent.
+- **Dataset**: [Steam Games Dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset/data)
+  - *Bemærk*: Der er fejl i datasættet, som nævnt i deres diskussioner. Jeg opdagede det desværre for sent.
 
-Http:
-http://127.0.0.1:8000/docs
-http://127.0.0.1:8000/redoc
+- **API Documentation**:
+  - [Swagger UI](http://127.0.0.1:8000/docs)
+  - [ReDoc](http://127.0.0.1:8000/redoc)
 
+## Prompts og Kode
 
+<details>
+<summary><strong>Prompt 1</strong></summary>
 
-## Cmds -- One Liners er meget street
-
-.venv\Scripts\activate; pip install -r requirements.txt; py main.py
-
-
-
-## Kun prompts og kode nede under
-<details> <summary><strong>Prompt 1</strong></summary>
-
+<pre>
 Can you help me setup a api, using fastapi and panda in python, that can do crud on a .csv file?
 The api should support pagination, filtering and sorting.
 If a lib can be used to make it easier, then do so.
@@ -163,13 +163,14 @@ Delete Game:
 
 DELETE /games/{game_id}
 This setup should give you a solid starting point for managing your CSV data with an API. Let me know if you need any modifications or additional features!
-
+</pre>
 </details>
 
 
+<details>
+<summary><strong>Prompt 2</strong></summary>
 
-<details> <summary><strong>Prompt 2</strong></summary>
-
+<pre>
 Can you put some doc strings on this, to explain the code?
 And maybe a comment where it could be hard to know what its doing.
 
@@ -425,5 +426,5 @@ Key Explanations:
 get_games(): Filters, sorts, and paginates games. The .str.contains() method is used to make filtering case-insensitive.
 create_game(): Adds a new row to the CSV, saving the file each time.
 update_game() and delete_game(): Locate game by AppID, update/delete it, and save changes.
-
+</pre>
 </details>
