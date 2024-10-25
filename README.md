@@ -1,7 +1,14 @@
 # FastAPI CSV API
 
-Dette projekt opretter et Python API ved hjælp af FastAPI og pandas, der bruger en CSV-fil som "database".    
+Dette projekt udstiller et Python API ved hjælp af FastAPI og pandas, der bruger en CSV-fil som "database".    
 API'et understøtter CRUD-operationer samt pagination, filtrering og sortering.
+
+## Kodebeskrivelse
+
+Koden til API’et er primært auto-genereret ved hjælp af ChatGPT, med et hint af google og StackOverflow til debugging.    
+Selvom det var hurgtigt genereret, var der en masse små-fejl og langt fra skrevet i en kodestandard som jeg er vant til fra C#.   
+En bedre folder stuktur, flere functions, class' og opsætning af en model, samt tests, ville gøre det lidt pænere og robust.
+
 
 ## How to Run
 
@@ -9,7 +16,7 @@ API'et understøtter CRUD-operationer samt pagination, filtrering og sortering.
 2. Opret evt. et virtuelt miljø.
 3. Kør følgende *Very-Street-OneLinerTM* i terminalen. Hvis du Ikke kører virtuelt, start fra pip install delen.
 
-   .venv\Scripts\activate; pip install -r requirements.txt; py main.py
+   `.venv\Scripts\activate; pip install -r requirements.txt; py main.py`
 
 
 ## Links
@@ -17,9 +24,18 @@ API'et understøtter CRUD-operationer samt pagination, filtrering og sortering.
 - **Dataset**: [Steam Games Dataset](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset/data)
   - *Bemærk*: Der er fejl i datasættet, som nævnt i deres diskussioner. Jeg opdagede det desværre for sent.
 
-- **API Documentation**:
+- **Localhost links til API når serveren kører**:
   - [Swagger UI](http://127.0.0.1:8000/docs)
   - [ReDoc](http://127.0.0.1:8000/redoc)
+ 
+
+## Værktøjer:
+
+- [ChatGPT: AI Overlord](https://chatgpt.com/)    
+- [FastAPI: Webframework til at opbygge APIs i Python.](https://fastapi.tiangolo.com/)    
+- [Pandas: Databehandling i Python, der gør det muligt at manipulere data i DataFrames.](https://pandas.pydata.org/)    
+- [Uvicorn: En server til at køre FastAPI-applikationen.](https://www.uvicorn.org/)    
+
 
 ## Prompts og Kode
 
